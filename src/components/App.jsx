@@ -1,6 +1,8 @@
+import Calc from "./Calc";
+
 function App(props) {
   return ( 
-    <h1>Calculator app</h1>
+    <Calc />
   );
 }
 
