@@ -11,18 +11,21 @@ class Calc extends Component {
     }
   }
 
+  updateTheme = (newThemeNo) => {
+    const newThemeColors = this.state.themes[newThemeNo]
+    for(const [key,value] of Object.entries(newThemeColors)){
+      document.documentElement.style.setProperty(key,value);
+    }
+  }
+
   handleClick = (value) => {
     console.log(value)
   }
   
   handleToggle = () => {
     const newTheme = this.state.currentThemeNo + 1 < 4 ? this.state.currentThemeNo + 1 : 1;
-    const newThemeColors = this.state.themes[newTheme]
-    console.log(newThemeColors)
+    this.updateTheme(newTheme)
 
-    for(const [key,value] of Object.entries(newThemeColors)){
-      document.documentElement.style.setProperty(key,value);
-    }
     this.setState({
       currentThemeNo: newTheme
     })
@@ -35,6 +38,7 @@ class Calc extends Component {
         this.setState({
           themes: data
         })
+        this.updateTheme(this.state.currentThemeNo);
       })
       .catch(error => {
         console.log(error)

@@ -1,0 +1,62 @@
+.toggle {
+  position: relative;
+}
+
+.toggle>span {
+  color: var(--display-color);
+  font-size: .75rem;
+
+  position: absolute;
+  top: -20px;
+}
+
+.toggle>span:nth-child(1) {
+  left: 10px;
+}
+
+.toggle>span:nth-child(2) {
+  left: 30px;
+}
+
+.toggle>span:nth-child(3) {
+  left: 52px;
+}
+
+.toggle-btn {
+  width: 70px;
+  height: 25px;
+
+  background-color: var(--btn-grid-bg);
+  border: none;
+  border-radius: 2em;
+
+  position: relative;
+}
+
+.toggle-btn:hover {
+  cursor: pointer;
+}
+
+.toggle-btn .slider {
+  width: 15px;
+  height: 15px;
+
+  position: absolute;
+  top: 5px;
+
+  background-color: var(--btn-warning-bg);
+  border: none;
+  border-radius: 50%;
+}
+
+.slider--1 {
+  left: 5px;
+}
+
+.slider--2 {
+  left: calc(50% - 7.5px);
+}
+
+.slider--3 {
+  right: 5px;
+}
