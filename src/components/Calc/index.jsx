@@ -6,20 +6,47 @@ class Calc extends Component {
   constructor(props){
     super(props)
     this.state = {
-      currentThemeNo: 1
+      currentThemeNo: 1,
+      themes: {}
     }
   }
 
   handleClick = (value) => {
     console.log(value)
   }
+  
+  handleToggle = () => {
+    const newTheme = this.state.currentThemeNo + 1 < 4 ? this.state.currentThemeNo + 1 : 1;
+    const newThemeColors = this.state.themes[newTheme]
+    console.log(newThemeColors)
+
+    for(const [key,value] of Object.entries(newThemeColors)){
+      document.documentElement.style.setProperty(key,value);
+    }
+    this.setState({
+      currentThemeNo: newTheme
+    })
+  }
+
+  componentDidMount() {
+    fetch("theme.json")
+      .then(data => data.json())
+      .then(data => {
+        this.setState({
+          themes: data
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
   render() { 
     return (
-    <>
-      <Header currentThemeNo={this.state.currentThemeNo} />
+    <div className="calc">
+      <Header currentThemeNo={this.state.currentThemeNo} onClick={this.handleToggle} />
 
-      <div className="display"></div>
+      <div className="display">399,981</div>
       <div className="btn-grid">
         <Button value={7} className="btn btn--primary" onClick={this.handleClick} />
         <Button value={8} className="btn btn--primary" onClick={this.handleClick} />
@@ -41,10 +68,10 @@ class Calc extends Component {
         <Button value="/" className="btn btn--primary" onClick={this.handleClick} />
         <Button value="x" className="btn btn--primary" onClick={this.handleClick} />
 
-        <Button value="RESET" className="btn btn--secondary row-span-2" onClick={this.handleClick} />
-        <Button value="=" className="btn btn--warning row-span-2" onClick={this.handleClick} />
+        <Button value="RESET" className="btn btn--secondary col-span-2" onClick={this.handleClick} />
+        <Button value="=" className="btn btn--warning col-span-2" onClick={this.handleClick} />
       </div>
-    </>
+    </div>
     );
   }
 }

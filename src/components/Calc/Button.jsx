@@ -14,7 +14,7 @@ function Button(props) {
         props.onClick(props.value)
       }}
     >
-    {props.value}
+    <span> {props.value} </span>
     </div>
   );
 }

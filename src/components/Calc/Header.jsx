@@ -10,8 +10,8 @@ function Header(props) {
           <span>2</span>
           <span>3</span>
 
-          <div className="toggle-btn">
-            <span className={`slicer slicer--${props.currentThemeNo}`}></span>
+          <div className="toggle-btn" onClick={props.onClick}>
+            <span className={`slider slider--${props.currentThemeNo}`}></span>
           </div>
         </div>
       </div>
