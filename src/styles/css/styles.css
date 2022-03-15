@@ -152,7 +152,7 @@ main {
 
 .display {
   min-height: clamp(88px, 20vw, 128px);
-  font-size: clamp(2rem, 7.5vw, 3rem);
+  font-size: clamp(1.5rem, 5.5vw, 2.5rem);
   padding: 22px 32px;
   background-color: var(--display-bg);
   border: none;

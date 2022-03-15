@@ -6,6 +6,10 @@ class Calc extends Component {
   constructor(props){
     super(props)
     this.state = {
+      currentValue: "",
+      previousValue: 0,
+      currentOperation: "",
+
       currentThemeNo: 1,
       themes: {}
     }
@@ -18,8 +22,69 @@ class Calc extends Component {
     }
   }
 
+  addToCurrentValue = (value) => {
+    if (value === ".") {
+      this.setState({
+        currentValue: this.state.currentValue !== "" ? this.state.currentValue + value : "0."
+      })
+      return
+    }
+    this.setState({
+      currentValue: this.state.currentValue !== "" ? this.state.currentValue + value : value.toString()
+    })
+  }
+
+  handleOperator = (value) => {
+    if (value !== "=") {
+      this.setState({
+        previousValue: this.state.currentValue !== "" ? +this.state.currentValue : 0,
+        currentOperation: value,
+        currentValue: ""
+      })
+    }else {
+      let result;
+      switch(this.state.currentOperation) {
+        case "+":
+          result = this.state.previousValue + (this.state.currentValue !== "" ? +this.state.currentValue : 0);
+          break
+        case "-":
+          result = this.state.previousValue - (this.state.currentValue !== "" ? +this.state.currentValue : 0);
+          break
+        case "x":
+          result = this.state.previousValue * (this.state.currentValue !== "" ? +this.state.currentValue : 0);
+          break
+        case "/":
+          result = this.state.previousValue / (this.state.currentValue !== "" ? +this.state.currentValue : 0);
+          break
+        default:
+          result = this.state.currentValue
+      }
+      this.setState({
+        previousValue: 0,
+        currentOperation: "",
+        currentValue: result.toString()
+      })
+    }
+  }
+
   handleClick = (value) => {
-    console.log(value)
+    if (typeof value === "number" || value === ".") {
+      this.addToCurrentValue(value)
+    }
+    else if (value === "DEL") {
+      this.setState({
+        currentValue: ""
+      })
+    }
+    else if (value === "RESET") {
+      this.setState({
+        currentValue: "",
+        previousValue: 0,
+        currentOperation: ""
+      })
+    }else {
+      this.handleOperator(value)
+    }
   }
   
   handleToggle = () => {
@@ -50,7 +115,9 @@ class Calc extends Component {
     <div className="calc">
       <Header currentThemeNo={this.state.currentThemeNo} onClick={this.handleToggle} />
 
-      <div className="display">399,981</div>
+      <div className="display">
+        {this.state.currentValue !== "" ? this.state.currentValue : "0"}
+      </div>
       <div className="btn-grid">
         <Button value={7} className="btn btn--primary" onClick={this.handleClick} />
         <Button value={8} className="btn btn--primary" onClick={this.handleClick} />
