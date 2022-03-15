@@ -27,7 +27,7 @@ main {
 
 .calc {
   display: flex;
-  gap: 2em;
+  gap: 1.5em;
 
   flex-flow: column nowrap;
   align-items: stretch;
@@ -82,7 +82,7 @@ main {
   grid-template-columns: repeat(4,1fr);
 
   padding: 2em;
-  gap: 1em;
+  gap: min(3vw,1.25em);
 
   background-color: var(--btn-grid-bg);
   border: none;
