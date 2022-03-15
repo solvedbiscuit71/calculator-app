@@ -1,0 +1,7 @@
+# ---: files :---
+package-lock.json
+
+# ---: folder :---
+build/
+design/
+node_modules/
