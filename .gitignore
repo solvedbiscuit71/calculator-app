@@ -1,4 +1,5 @@
 # ---: files :---
+.DS_Store
 package-lock.json
 
 # ---: folder :---
